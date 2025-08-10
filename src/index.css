@@ -1,0 +1,130 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-sand: #ecba82;
+  --color-steel: #4f7cac;
+  --color-dark: #272727;
+  --color-green: #55d44c;
+  --color-indigo: #4059ad;
+  --color-forest: #252d2a;
+}
+
+/* Fixed dark theme: never switch to light */
+:root {
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  @apply m-0 min-h-screen text-white;
+  background: radial-gradient(
+      1200px 800px at 20% 0%,
+      color(display-p3 0.28 0.35 0.68) 0%,
+      color(display-p3 0.15 0.18 0.23) 40%,
+      transparent 60%
+    ),
+    radial-gradient(
+      800px 600px at 90% 10%,
+      var(--color-steel) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 700px at 30% 120%,
+      var(--color-forest) 0%,
+      transparent 70%
+    ),
+    linear-gradient(160deg, var(--color-dark), #111);
+}
+
+/* Futuristic warp tunnel animation */
+@keyframes warp {
+  0% {
+    transform: translateZ(0) rotate(0deg);
+    filter: hue-rotate(0deg) blur(0px);
+  }
+  50% {
+    filter: hue-rotate(25deg) blur(1px);
+  }
+  100% {
+    transform: translateZ(0) rotate(360deg);
+    filter: hue-rotate(0deg) blur(0px);
+  }
+}
+
+.warp-tunnel {
+  position: relative;
+  isolation: isolate;
+}
+
+.warp-tunnel::before,
+.warp-tunnel::after {
+  content: '';
+  position: absolute;
+  inset: -30% -30%;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    var(--color-indigo),
+    var(--color-steel),
+    var(--color-sand),
+    var(--color-green),
+    var(--color-indigo)
+  );
+  opacity: 0.12;
+  animation: warp 6s linear infinite;
+  z-index: -2;
+}
+
+.warp-tunnel::after {
+  filter: blur(28px) saturate(120%);
+  opacity: 0.3;
+  animation-duration: 9s;
+}
+
+/* Card glass effect */
+.glass-card {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.06),
+    rgba(255, 255, 255, 0.02)
+  );
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+}
+
+/* Button shine hover */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shine::before {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: -50%;
+  width: 50%;
+  height: 300%;
+  transform: rotate(25deg);
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.25),
+    rgba(255, 255, 255, 0)
+  );
+  transition: left 0.5s ease;
+}
+.btn-shine:hover::before {
+  left: 150%;
+}
+
+/* Accessibility: focus ring */
+.focus-ring:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--color-sand) 70%, white 30%);
+  outline-offset: 2px;
+}

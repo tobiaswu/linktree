@@ -8,9 +8,7 @@ export function buildVCard(profile: Profile): string {
   const firstName = rest.reverse().join(' ');
   lines.push(`N:${lastName || ''};${firstName || ''};;;`);
   lines.push(`FN:${profile.name}`);
-  if (profile.introduction) {
-    lines.push(`TITLE:${escapeText(profile.introduction)}`);
-  }
+  lines.push(`TITLE:${escapeText("AI Strategist | Developer | Software with AI")}`);
   if (profile.email) {
     lines.push(`EMAIL;TYPE=INTERNET:${profile.email}`);
   }
